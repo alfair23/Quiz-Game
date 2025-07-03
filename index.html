@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuis Logika Ketua Kelas</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right top, #1f1c2c, #928dab);
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffe1;
+      max-width: 500px;
+      margin: auto;
+    }
+    input {
+      padding: 10px;
+      width: 70%;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #00ffe1;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Kuis Logika 🧠</h1>
+    <p id="questionText">Siap menjawab pertanyaan pertama?</p>
+    <input type="text" id="answerInput" placeholder="Tulis jawabanmu..." />
+    <button onclick="checkAnswer()">Jawab!</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "Berapa hasil dari 5 x 3?", a: "15" },
+      { q: "Apa huruf ketiga dari kata 'ketua'?", a: "t" },
+      { q: "Satu tahun berapa bulan?", a: "12" },
+      { q: "Apa kebalikan dari kata 'besar'?", a: "kecil" },
+      { q: "Berapa sisi segitiga?", a: "3" },
+      { q: "Apa warna bendera Indonesia paling atas?", a: "merah" },
+      { q: "Apakah air membeku di suhu 0 derajat celcius? (ya/tidak)", a: "ya" },
+      { q: "Hari setelah Jumat adalah?", a: "sabtu" },
+      { q: "Berapa jumlah jari tangan manusia?", a: "10" },
+      { q: "Siapa pemimpin di kelas? (jawab 1 kata saja)", a: "ketua" }
+    ];
+
+    let current = 0;
+
+    function checkAnswer() {
+      const input = document.getElementById("answerInput").value.trim().toLowerCase();
+      const resultText = document.getElementById("result");
+      const questionText = document.getElementById("questionText");
+
+      if (input === questions[current].a) {
+        current++;
+        if (current < questions.length) {
+          resultText.textContent = "✅ Benar! Lanjut ke soal berikutnya.";
+          resultText.style.color = "#00ff88";
+          questionText.textContent = questions[current].q;
+          document.getElementById("answerInput").value = "";
+        } else {
+          resultText.textContent = "🎉 KAMU LULUS JADI JUARA LOGIKA!";
+          resultText.style.color = "#ffff00";
+          questionText.textContent = "Kuis selesai!";
+        }
+      } else {
+        resultText.textContent = "❌ Salah. Ulang dari awal ya!";
+        resultText.style.color = "#ff4444";
+        current = 0;
+        questionText.textContent = questions[current].q;
+        document.getElementById("answerInput").value = "";
+      }
+    }
+
+    // Tampilkan soal pertama saat dimuat
+    document.getElementById("questionText").textContent = questions[current].q;
+  </script>
+</body>
+</html>
